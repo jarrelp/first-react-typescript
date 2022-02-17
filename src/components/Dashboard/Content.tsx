@@ -7,44 +7,24 @@ import LineChart from "./customcharts/LineChart";
 import AreaChart from "./customcharts/AreaChart";
 import BarChart from "./customcharts/BarChart";
 import ScatterChart from "./customcharts/ScatterChart";
+import { JsxEmit } from "typescript";
+import { ComponentsListData, OriginalItems, InitialLayouts } from "./data/ComponentsListData";
 
-const originalItems = ["a", "b", "c", "d", "e", "f"];
-
-const initialLayouts = {
-  lg: [
-    { w: 6, h: 6, x: 0, y: 0, i: "a", moved: false, static: false },
-    { w: 6, h: 6, x: 6, y: 0, i: "b", moved: false, static: false },
-    { w: 6, h: 6, x: 6, y: 6, i: "c", moved: false, static: false },
-    { w: 6, h: 6, x: 12, y: 6, i: "d", moved: false, static: false },
-    { w: 6, h: 6, x: 12, y: 12, i: "e", moved: false, static: false },
-    { w: 6, h: 6, x: 18, y: 12, i: "f", moved: false, static: false },
-  ]
-};
-
-const componentList = {
-  a: LineChart,
-  b: AreaChart,
-  c: BarChart,
-  d: ScatterChart,
-  e: LineChart,
-  f: BarChart
-};
-
-function Content({ size: width }: { size: string }) {
-  const [items, setItems] = useState(originalItems);
+function Content(size: number) {
+  const [items, setItems] = useState(OriginalItems);
   const [layouts, setLayouts] = useState(
-    getFromLS("layouts") || initialLayouts
+    getFromLS("layouts") || InitialLayouts
   );
-  const onLayoutChange = (_, allLayouts) => {
+  const onLayoutChange = (_: ReactGridLayout.Layout[], allLayouts: ReactGridLayout.Layouts) => {
     setLayouts(allLayouts);
   };
   const onLayoutSave = () => {
     saveToLS("layouts", layouts);
   };
-  const onRemoveItem = (itemId) => {
+  const onRemoveItem = (itemId: string) => {
     setItems(items.filter((i) => i !== itemId));
   };
-  const onAddItem = (itemId) => {
+  const onAddItem = (itemId: string) => {
     setItems([...items, itemId]);
   };
 
@@ -55,7 +35,7 @@ function Content({ size: width }: { size: string }) {
         items={items}
         onRemoveItem={onRemoveItem}
         onAddItem={onAddItem}
-        originalItems={originalItems}
+        originalItems={OriginalItems}
       />
       <ResponsiveGridLayout
         className="layout"
@@ -63,7 +43,7 @@ function Content({ size: width }: { size: string }) {
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         rowHeight={60}
-        width={width}
+        width={size}
         onLayoutChange={onLayoutChange}
       >
         {items.map((key) => (
@@ -75,7 +55,7 @@ function Content({ size: width }: { size: string }) {
             <Widget
               id={key}
               onRemoveItem={onRemoveItem}
-              component={componentList[key]}
+              component={ComponentsListData[key]} 
             />
           </div>
         ))}
@@ -86,17 +66,17 @@ function Content({ size: width }: { size: string }) {
 
 export default withSize({ refreshMode: "debounce", refreshRate: 60 })(Content);
 
-function getFromLS(key) {
-  let ls = {};
+function getFromLS(key: number) {
+  let ls = [];
   if (global.localStorage) {
     try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+      ls = JSON.parse(global.localStorage.getItem("rgl-8") ?? "") || {};
     } catch (e) {}
   }
   return ls[key];
 }
 
-function saveToLS(key, value) {
+function saveToLS(key: number, value: any) {
   if (global.localStorage) {
     global.localStorage.setItem(
       "rgl-8",

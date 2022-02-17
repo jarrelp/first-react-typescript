@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
+import { ComponentsListData } from "./data/ComponentsListData";
 
 const useStyles = makeStyles({
   root: {
@@ -26,21 +27,13 @@ const useStyles = makeStyles({
   }
 });
 
-const widgetNames = {
-  a: 'Line Chart',
-  b: 'Area Chart',
-  c: 'Bar Chart',
-  d: 'Scatter Chart',
-  e: 'Line Chart',
-  f: 'Bar Chart'
-};
 export default function Widget({ id, onRemoveItem, component: Item }) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <div className={classes.header}>
         <Typography variant="h6" gutterBottom>
-          {widgetNames[id]}
+          {ComponentsListData[id]}
         </Typography>
         <div className={classes.spacer} />
         <IconButton aria-label="delete" onClick={() => onRemoveItem(id)}>

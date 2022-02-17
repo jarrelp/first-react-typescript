@@ -8,6 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { ComponentsList } from "./interfaces/interfaces";
 
 const useStyles = makeStyles((theme) => ({
   popup: {
@@ -15,14 +16,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const widgetNames = {
-  a: "Line Chart",
-  b: "Area Chart",
-  c: "Bar Chart",
-  d: "Scatter Chart",
-  e: "Scatter Chart",
-  f: "Scatter Chart"
-};
+const widgetNames: ComponentsList[] = [
+  {
+    name: "a", 
+    charttype: "Line Chart"
+  },
+  {
+    name: "b", 
+    charttype: "Area Chart"
+  },
+  {
+    name: "c", 
+    charttype: "Bar Chart"
+  },
+  {
+    name: "d", 
+    charttype: "Scatter Chart"
+  },
+  {
+    name: "e", 
+    charttype: "Scatter Chart"
+  },
+  {
+    name: "f", 
+    charttype: "Scatter Chart"
+  }
+];
 
 export default function AddList({
   items,
