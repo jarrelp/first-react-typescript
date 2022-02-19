@@ -1,7 +1,7 @@
-import { ComponentsList } from "../interfaces/interfaces";
-import { ChartInfos } from "../interfaces/interfaces";
+import { IComponentsList } from "../../../interfaces/interfaces";
+import { IChartInfos } from "../../../interfaces/interfaces";
 
-export const ComponentsListData: ComponentsList[] = [
+export const ComponentsListData: IComponentsList[] = [
   {
     name: "a", 
     charttype: "Line Chart"
@@ -34,7 +34,7 @@ export function OriginalItems(): string[] {
   return namelist;
 }
 
-export const InitialLayouts: ChartInfos = {
+export const InitialLayouts: IChartInfos = {
   chartinfos: [
     [ "a", 6, 6, 0, 0, false, false ],
     [ "b", 6, 6, 6, 0, false, false ],

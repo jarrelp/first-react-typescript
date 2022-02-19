@@ -1,5 +1,4 @@
 import React from "react";
-import { ChartDataInfo } from "../interfaces/interfaces";
 import { AreaBarLineChartData } from "../data/ChartData";
 import {
   BarChart,

@@ -1,7 +1,7 @@
-import { ThreeDimensionalCoordinate, ChartDataInfo } from "../interfaces/interfaces";
+import { IThreeDimensionalCoordinate, IChartDataInfo } from "../../../interfaces/interfaces";
 
 //ScatterChart
-export const ScatterChartData: ThreeDimensionalCoordinate[] = [
+export const ScatterChartData: IThreeDimensionalCoordinate[] = [
   { x: 100, y: 200, z: 200 },
   { x: 120, y: 100, z: 260 },
   { x: 170, y: 300, z: 400 },
@@ -11,7 +11,7 @@ export const ScatterChartData: ThreeDimensionalCoordinate[] = [
 ];
 
 //AreaChart, BarChart, LineChart data
-export const AreaBarLineChartData: ChartDataInfo[] = [
+export const AreaBarLineChartData: IChartDataInfo[] = [
   {
     name: "Page A",
     uv: 4000,

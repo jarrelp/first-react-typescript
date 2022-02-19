@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Popover from "@mui/material/Popover";
 import FormLabel from "@mui/material/FormLabel";
@@ -8,40 +8,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { ComponentsList } from "./interfaces/interfaces";
+import { ComponentsListData } from "./data/ComponentsListData";
 
 const useStyles = makeStyles((theme) => ({
   popup: {
     padding: theme.spacing(2)
   }
 }));
-
-const widgetNames: ComponentsList[] = [
-  {
-    name: "a", 
-    charttype: "Line Chart"
-  },
-  {
-    name: "b", 
-    charttype: "Area Chart"
-  },
-  {
-    name: "c", 
-    charttype: "Bar Chart"
-  },
-  {
-    name: "d", 
-    charttype: "Scatter Chart"
-  },
-  {
-    name: "e", 
-    charttype: "Scatter Chart"
-  },
-  {
-    name: "f", 
-    charttype: "Scatter Chart"
-  }
-];
 
 export default function AddList({
   items,
@@ -50,9 +23,9 @@ export default function AddList({
   originalItems
 }) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -63,7 +36,7 @@ export default function AddList({
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     if (e.target.checked) {
       onAddItem(e.target.name);
     } else {
@@ -94,7 +67,7 @@ export default function AddList({
           <FormControl component="fieldset">
             <FormLabel component="legend">Select Widgets</FormLabel>
             <FormGroup>
-              {originalItems.map((i) => (
+              {originalItems.map((i: any) => (
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -103,7 +76,7 @@ export default function AddList({
                       name={i}
                     />
                   }
-                  label={widgetNames[i]}
+                  label={ComponentsListData[i]}
                   key={i}
                 />
               ))}
