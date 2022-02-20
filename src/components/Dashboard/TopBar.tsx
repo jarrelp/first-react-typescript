@@ -3,7 +3,16 @@ import Card from "@mui/material/Card";
 import { makeStyles } from "@mui/styles";
 import IconButton from "@mui/material/IconButton";
 import SaveIcon from "@mui/icons-material/Save";
-import AddList from "./AddList";
+import { AddList } from "./AddList";
+import { IComponentsList } from "../../interfaces";
+
+interface TopBarProps {
+  onLayoutSave: (event: React.MouseEvent<HTMLElement>) => void
+  items: string[]
+  onRemoveItem: (itemId: string) => void
+  onAddItem: (itemId: string) => void
+  originalItems?: () => string[]
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +28,7 @@ export default function TopBar({
   onRemoveItem,
   onAddItem,
   originalItems
-}) {
+}: TopBarProps) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>

@@ -1,5 +1,5 @@
 import { getAll, get, create, update, remove, removeAll } from "./GenericService"
-import { IChartDataInfo } from "../interfaces/interfaces"
+import { IChartDataInfo } from "../interfaces"
 
 const path = "chart";
 

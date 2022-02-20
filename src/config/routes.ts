@@ -13,7 +13,7 @@ import {
 
 import { Home } from '../pages/Home';
 
-import { Route } from '../types/Route';
+import { Route } from '../interfaces';
 
 const routes: Array<Route> = [
   {

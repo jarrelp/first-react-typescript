@@ -10,18 +10,26 @@ import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { ComponentsListData } from "./data/ComponentsListData";
 
+interface TopBarProps {
+  items: typeof ComponentsListData
+  onRemoveItem: (event: React.MouseEvent<HTMLElement>) => void
+  onAddItem?: number
+  originalItems?: string[]
+};
+
+
 const useStyles = makeStyles((theme) => ({
   popup: {
     padding: theme.spacing(2)
   }
 }));
 
-export default function AddList({
+export const AddList = ({
   items,
   onRemoveItem,
   onAddItem,
   originalItems
-}) {
+}) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 

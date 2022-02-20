@@ -1,6 +1,6 @@
 import { IAppContext } from '../contexts/AppContext';
 
-import { User } from '../types/User';
+import { User } from '../interfaces';
 
 class AppClient implements IAppContext {
   user: User;
@@ -11,9 +11,9 @@ class AppClient implements IAppContext {
    */
   constructor() {
     this.user = {
-      id: '5e8d8hg8h8h8q8faf8g8f8f',
-      name: 'Dwight Schrute',
-      email: 'dwight.schrute@welcomedeveloper.com',
+      id: '9fa087f4-2ea0-4c07-87e8-3ca361910cec',
+      name: 'Test User',
+      email: 'testuser@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date(),
       isAdmin: true,

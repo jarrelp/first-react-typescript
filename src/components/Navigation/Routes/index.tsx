@@ -5,7 +5,7 @@ import { RouteItem } from './RouteItem';
 import { SignOutRoute } from './SignOutRoute';
 
 import { routes } from '../../../config';
-import { Route } from '../../../types';
+import { Route } from '../../../interfaces';
 
 export const Routes = () => {
   const [routesState, setRoutesStage] = useState<Route[]>(routes);

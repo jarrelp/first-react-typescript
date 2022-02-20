@@ -1,4 +1,4 @@
-import { IThreeDimensionalCoordinate, IChartDataInfo } from "../../../interfaces/interfaces";
+import { IThreeDimensionalCoordinate, IChartDataInfo } from "../../../interfaces";
 
 //ScatterChart
 export const ScatterChartData: IThreeDimensionalCoordinate[] = [

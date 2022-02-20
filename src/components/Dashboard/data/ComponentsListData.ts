@@ -1,5 +1,5 @@
-import { IComponentsList } from "../../../interfaces/interfaces";
-import { IChartInfos } from "../../../interfaces/interfaces";
+import { IComponentsList } from "../../../interfaces";
+import { IChartInfos } from "../../../interfaces";
 
 export const ComponentsListData: IComponentsList[] = [
   {

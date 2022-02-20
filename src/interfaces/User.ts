@@ -1,7 +1,7 @@
 /**
  * Represents a user.
  */
-export type User = {
+export interface User {
   /**
    * The user's unique identifier
    * @type {string}

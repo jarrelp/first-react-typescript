@@ -1,7 +1,7 @@
 /**
  * Represents a menu item.
  */
-export type MenuItem = {
+export interface MenuItem {
   /**
    * The menu item's unique identifier
    *
