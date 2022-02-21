@@ -11,10 +11,10 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { ComponentsListData } from "./data/ComponentsListData";
 
 interface TopBarProps {
-  items: typeof ComponentsListData
-  onRemoveItem: (event: React.MouseEvent<HTMLElement>) => void
-  onAddItem?: number
-  originalItems?: string[]
+  items: string[]
+  onRemoveItem: (itemId: string) => void
+  onAddItem: (itemId: string) => void
+  originalItems?: () => string[]
 };
 
 
@@ -29,7 +29,7 @@ export const AddList = ({
   onRemoveItem,
   onAddItem,
   originalItems
-}) => {
+}: TopBarProps) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 

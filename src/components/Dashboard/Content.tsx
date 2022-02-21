@@ -66,7 +66,7 @@ function Content(size: number) {
 
 export default withSize({ refreshMode: "debounce", refreshRate: 60 })(Content);
 
-function getFromLS(key: number) {
+function getFromLS(key: string) {
   let ls = [];
   if (global.localStorage) {
     try {
@@ -76,7 +76,7 @@ function getFromLS(key: number) {
   return ls[key];
 }
 
-function saveToLS(key: number, value: any) {
+function saveToLS(key: string, value: any) {
   if (global.localStorage) {
     global.localStorage.setItem(
       "rgl-8",
