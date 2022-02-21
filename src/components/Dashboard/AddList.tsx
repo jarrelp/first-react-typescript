@@ -8,14 +8,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { ComponentsListData } from "./data/ComponentsListData";
+import { WidgetNames } from "./data/ComponentsListData";
 
-interface TopBarProps {
-  items: string[]
-  onRemoveItem: (itemId: string) => void
-  onAddItem: (itemId: string) => void
-  originalItems?: () => string[]
-};
+// interface TopBarProps {
+//   items: string[]
+//   onRemoveItem: (itemId: string) => void
+//   onAddItem: (itemId: string) => void
+//   originalItems?: () => string[]
+// };
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,7 @@ export const AddList = ({
   onRemoveItem,
   onAddItem,
   originalItems
-}: TopBarProps) => {
+}) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -75,7 +75,7 @@ export const AddList = ({
           <FormControl component="fieldset">
             <FormLabel component="legend">Select Widgets</FormLabel>
             <FormGroup>
-              {originalItems.map((i: any) => (
+              {originalItems.map((i) => (
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -84,7 +84,7 @@ export const AddList = ({
                       name={i}
                     />
                   }
-                  label={ComponentsListData[i]}
+                  label={WidgetNames[i]}
                   key={i}
                 />
               ))}

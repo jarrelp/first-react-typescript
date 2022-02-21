@@ -4,15 +4,15 @@ import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
-import { ComponentsListData } from "./data/ComponentsListData";
+import { WidgetNames } from "./data/ComponentsListData";
 import { IChartTypes } from "../../interfaces";
 import AreaChart from "./customcharts/AreaChart"
 
-interface WidgetProps {
-  id: string
-  onRemoveItem: (itemId: string) => void
-  component: React.ReactNode
-}
+// interface WidgetProps {
+//   id: string
+//   onRemoveItem: (itemId: string) => void
+//   component: React.ReactNode
+// }
 
 const useStyles = makeStyles({
   root: {
@@ -35,13 +35,13 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Widget({ id, onRemoveItem, component }: WidgetProps) {
+export default function Widget({ id, onRemoveItem, component: Item }) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <div className={classes.header}>
         <Typography variant="h6" gutterBottom>
-          {ComponentsListData.find(i => i.name === id)}
+          {WidgetNames[id]}
         </Typography>
         <div className={classes.spacer} />
         <IconButton aria-label="delete" onClick={() => onRemoveItem(id)}>
@@ -49,12 +49,8 @@ export default function Widget({ id, onRemoveItem, component }: WidgetProps) {
         </IconButton>
       </div>
       <div className={classes.body}>
-        <React.ReactNode />
+        <Item />
       </div>
     </Card>
   );
 }
-
-const Button = ({ component, ...props }: WidgetProps): JSX.Element => {
-  return <button {...props}></button>;
-};

@@ -37,11 +37,11 @@ export const MobileMenu = ({ isMenuOpen, handleMenuOpen, handleMenuClose, anchor
           Toggle Theme
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
-          <Messages total={15} disableTooltip />
+          <Messages total={1} disableTooltip />
           Messages
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
-          <Notifications total={20} disableTooltip />
+          <Notifications total={1} disableTooltip />
           Notifications
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>

@@ -1,38 +1,57 @@
 import { IComponentsList } from "../../../interfaces";
 import { IChartInfos } from "../../../interfaces";
 
-export const ComponentsListData: IComponentsList[] = [
-  {
-    name: "a", 
-    charttype: "Line Chart"
-  },
-  {
-    name: "b", 
-    charttype: "Area Chart"
-  },
-  {
-    name: "c", 
-    charttype: "Bar Chart"
-  },
-  {
-    name: "d", 
-    charttype: "Scatter Chart"
-  },
-  {
-    name: "e", 
-    charttype: "Scatter Chart"
-  },
-  {
-    name: "f", 
-    charttype: "Scatter Chart"
-  }
-];
+import LineChart from "../customcharts/LineChart";
+import AreaChart from "../customcharts/AreaChart";
+import BarChart from "../customcharts/BarChart";
+import ScatterChart from "../customcharts/ScatterChart";
 
-export function OriginalItems(): string[] {
-  var namelist = [];
-  for(var i = 0; i < ComponentsListData.length; i++) namelist.push(ComponentsListData[i].name);
-  return namelist;
-}
+// export const ComponentsListData: IComponentsList[] = [
+//   {
+//     name: "a", 
+//     charttype: "Line Chart"
+//   },
+//   {
+//     name: "b", 
+//     charttype: "Area Chart"
+//   },
+//   {
+//     name: "c", 
+//     charttype: "Bar Chart"
+//   },
+//   {
+//     name: "d", 
+//     charttype: "Scatter Chart"
+//   },
+//   {
+//     name: "e", 
+//     charttype: "Scatter Chart"
+//   },
+//   {
+//     name: "f", 
+//     charttype: "Scatter Chart"
+//   }
+// ];
+
+export const WidgetNames = {
+  a: 'Line Chart',
+  b: 'Area Chart',
+  c: 'Bar Chart',
+  d: 'Scatter Chart',
+  e: 'Line Chart',
+  f: 'Bar Chart'
+};
+
+export const ComponentListData = {
+  a: LineChart,
+  b: AreaChart,
+  c: BarChart,
+  d: ScatterChart,
+  e: LineChart,
+  f: BarChart
+};
+
+export const OriginalItems = ["a", "b", "c", "d", "e", "f"];
 
 export const InitialLayouts: IChartInfos = {
   chartinfos: [

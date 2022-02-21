@@ -8,9 +8,9 @@ import AreaChart from "./customcharts/AreaChart";
 import BarChart from "./customcharts/BarChart";
 import ScatterChart from "./customcharts/ScatterChart";
 import { JsxEmit } from "typescript";
-import { ComponentsListData, OriginalItems, InitialLayouts } from "./data/ComponentsListData";
+import { ComponentListData, OriginalItems, InitialLayouts } from "./data/ComponentsListData";
 
-function Content(size: number) {
+function Content({size: { width } }) {
   const [items, setItems] = useState(OriginalItems);
   const [layouts, setLayouts] = useState(
     getFromLS("layouts") || InitialLayouts
@@ -43,7 +43,7 @@ function Content(size: number) {
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         rowHeight={60}
-        width={size}
+        width={width}
         onLayoutChange={onLayoutChange}
       >
         {items.map((key) => (
@@ -55,7 +55,7 @@ function Content(size: number) {
             <Widget
               id={key}
               onRemoveItem={onRemoveItem}
-              component={ComponentsListData[key]} 
+              component={ComponentListData[key]} 
             />
           </div>
         ))}
