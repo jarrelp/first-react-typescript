@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { makeStyles } from "@mui/styles";
+import { useState } from "react";
+import { styled } from '@mui/material';
 import Popover from "@mui/material/Popover";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
@@ -17,11 +17,9 @@ import { WidgetNames } from "./data/ComponentsListData";
 //   originalItems?: () => string[]
 // };
 
-
-const useStyles = makeStyles((theme) => ({
-  popup: {
-    padding: theme.spacing(2)
-  }
+const FormControlWrapper = styled(FormControl)(({ theme }) => ({
+  padding: theme.spacing(2),
+  component: "fieldset"
 }));
 
 export const AddList = ({
@@ -30,7 +28,6 @@ export const AddList = ({
   onAddItem,
   originalItems
 }) => {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event: any) => {
@@ -71,8 +68,8 @@ export const AddList = ({
           horizontal: "center"
         }}
       >
-        <div className={classes.popup}>
-          <FormControl component="fieldset">
+        
+          <FormControlWrapper>
             <FormLabel component="legend">Select Widgets</FormLabel>
             <FormGroup>
               {originalItems.map((i) => (
@@ -89,8 +86,8 @@ export const AddList = ({
                 />
               ))}
             </FormGroup>
-          </FormControl>
-        </div>
+          </FormControlWrapper>
+        
       </Popover>
     </>
   );

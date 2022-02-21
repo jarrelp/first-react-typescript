@@ -1,5 +1,4 @@
-import React from "react";
-import { makeStyles } from "@mui/styles";
+import { styled } from '@mui/material';
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,43 +13,44 @@ import AreaChart from "./customcharts/AreaChart"
 //   component: React.ReactNode
 // }
 
-const useStyles = makeStyles({
-  root: {
+const RootWrapper = styled(Card)({
     width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "column"
-  },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    padding: "0.5rem"
-  },
-  spacer: {
-    flexGrow: 1
-  },
-  body: {
-    padding: "0.5rem",
-    flexGrow: 1
-  }
 });
 
+const HeaderWrapper = styled('div')({
+  display: "flex",
+  alignItems: "center",
+  padding: "0.5rem"
+});
+
+const SpacerWrapper = styled('div')({
+  flexGrow: 1
+});
+
+const BodyWrapper = styled('div')({
+  padding: "0.5rem",
+    flexGrow: 1
+});
+
+
 export default function Widget({ id, onRemoveItem, component: Item }) {
-  const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <div className={classes.header}>
+    <RootWrapper>
+      <HeaderWrapper>
         <Typography variant="h6" gutterBottom>
           {WidgetNames[id]}
         </Typography>
-        <div className={classes.spacer} />
+        <SpacerWrapper/>
         <IconButton aria-label="delete" onClick={() => onRemoveItem(id)}>
           <CloseIcon fontSize="small" />
         </IconButton>
-      </div>
-      <div className={classes.body}>
+      </HeaderWrapper>
+      <BodyWrapper>
         <Item />
-      </div>
-    </Card>
+      </BodyWrapper>
+    </RootWrapper>
   );
 }

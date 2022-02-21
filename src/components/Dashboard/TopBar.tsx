@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "@mui/material/Card";
-import { makeStyles } from "@mui/styles";
+import { styled } from '@mui/material';
 import IconButton from "@mui/material/IconButton";
 import SaveIcon from "@mui/icons-material/Save";
 import { AddList } from "./AddList";
@@ -14,15 +14,13 @@ import { IComponentsList } from "../../interfaces";
 //   originalItems?: () => string[]
 // };
 
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(1),
-    width: "100%",
-    display: "flex",
-    justifyContent: "flex-end"
-  }
+const CardWrapper = styled(Card)(({ theme }) => ({
+  padding: theme.spacing(1),
+  width: "100%",
+  display: "flex",
+  justifyContent: "flex-end"
 }));
+
 export default function TopBar({
   onLayoutSave,
   items,
@@ -30,9 +28,8 @@ export default function TopBar({
   onAddItem,
   originalItems
 }) {
-  const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <CardWrapper>
       <AddList
         items={items}
         onRemoveItem={onRemoveItem}
@@ -42,6 +39,6 @@ export default function TopBar({
       <IconButton aria-label="save" onClick={onLayoutSave}>
         <SaveIcon />
       </IconButton>
-    </Card>
+    </CardWrapper>
   );
 }

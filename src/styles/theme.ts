@@ -4,9 +4,9 @@ import { Theme } from '@mui/material/styles';
 
 import { DARK_MODE_THEME, LIGHT_MODE_THEME } from '../utils/constants';
 
-declare module '@mui/styles/defaultTheme' {
-  interface DefaultTheme extends Theme {}
-}
+// declare module '@mui/styles/defaultTheme' {
+//   interface DefaultTheme extends Theme {}
+// }
 
 export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THEME) => {
   let theme: Theme = createTheme({
