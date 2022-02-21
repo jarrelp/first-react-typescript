@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import { withSize } from "react-sizeme";
 import TopBar from "./TopBar";
 import Widget from "./Widget";
-import LineChart from "./customcharts/LineChart";
-import AreaChart from "./customcharts/AreaChart";
-import BarChart from "./customcharts/BarChart";
-import ScatterChart from "./customcharts/ScatterChart";
-import { JsxEmit } from "typescript";
 import { ComponentListData, OriginalItems, InitialLayouts } from "./data/ComponentsListData";
 
 function Content({size: { width } }) {

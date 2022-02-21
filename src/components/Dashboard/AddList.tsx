@@ -68,7 +68,6 @@ export const AddList = ({
           horizontal: "center"
         }}
       >
-        
           <FormControlWrapper>
             <FormLabel component="legend">Select Widgets</FormLabel>
             <FormGroup>
@@ -87,7 +86,6 @@ export const AddList = ({
               ))}
             </FormGroup>
           </FormControlWrapper>
-        
       </Popover>
     </>
   );
