@@ -2,15 +2,25 @@ import { useState } from "react";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import { withSize } from "react-sizeme";
 import TopBar from "./TopBar";
+import ToolBox from "./ToolBox";
 import Widget from "./Widget";
-import { ComponentListData, OriginalItems, InitialLayouts } from "./data/ComponentsListData";
+import SpeedDialComponent from "./SpeedDialComponent";
+import {
+  ComponentListData,
+  OriginalItems,
+  InitialLayouts,
+} from "./data/ComponentsListData";
 
-function Content({size: { width } }) {
+function Content({ size: { width } }) {
   const [items, setItems] = useState(OriginalItems);
+  const [toolBoxItems, setToolBoxItems] = useState([]);
   const [layouts, setLayouts] = useState(
     getFromLS("layouts") || InitialLayouts
   );
-  const onLayoutChange = (_: ReactGridLayout.Layout[], allLayouts: ReactGridLayout.Layouts) => {
+  const onLayoutChange = (
+    _: ReactGridLayout.Layout[],
+    allLayouts: ReactGridLayout.Layouts
+  ) => {
     setLayouts(allLayouts);
   };
   const onLayoutSave = () => {
@@ -22,10 +32,40 @@ function Content({size: { width } }) {
   const onAddItem = (itemId: string) => {
     setItems([...items, itemId]);
   };
+  const onRemoveToolBoxItem = (itemId: string) => {
+    setToolBoxItems(toolBoxItems.filter((i) => i !== itemId));
+  };
+  const onAddToolBoxItem = (itemId: string) => {
+    setToolBoxItems([...toolBoxItems, itemId]);
+  };
+
+  const onTakeItem = (itemId: string) => {
+    onRemoveItem(itemId);
+    onAddToolBoxItem(itemId);
+  };
+
+  const onPutItem = (itemId: string) => {
+    onRemoveToolBoxItem(itemId);
+    onAddItem(itemId);
+  };
 
   return (
-    <>
+    <div>
+      <ToolBox
+        items={toolBoxItems}
+        width={width}
+        onLayoutChange={onLayoutChange}
+        onRemoveItem={onRemoveItem}
+        componentListData={ComponentListData}
+      />
       <TopBar
+        onLayoutSave={onLayoutSave}
+        items={items}
+        onRemoveItem={onTakeItem}
+        onAddItem={onPutItem}
+        originalItems={OriginalItems}
+      />
+      <SpeedDialComponent
         onLayoutSave={onLayoutSave}
         items={items}
         onRemoveItem={onRemoveItem}
@@ -50,12 +90,12 @@ function Content({size: { width } }) {
             <Widget
               id={key}
               onRemoveItem={onRemoveItem}
-              component={ComponentListData[key]} 
+              component={ComponentListData[key]}
             />
           </div>
         ))}
       </ResponsiveGridLayout>
-    </>
+    </div>
   );
 }
 
@@ -76,7 +116,7 @@ function saveToLS(key: string, value: any) {
     global.localStorage.setItem(
       "rgl-8",
       JSON.stringify({
-        [key]: value
+        [key]: value,
       })
     );
   }

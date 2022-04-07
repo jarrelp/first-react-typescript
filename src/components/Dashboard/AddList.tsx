@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { styled } from '@mui/material';
+import { styled } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
@@ -19,15 +19,10 @@ import { WidgetNames } from "./data/ComponentsListData";
 
 const FormControlWrapper = styled(FormControl)(({ theme }) => ({
   padding: theme.spacing(2),
-  component: "fieldset"
+  component: "fieldset",
 }));
 
-export const AddList = ({
-  items,
-  onRemoveItem,
-  onAddItem,
-  originalItems
-}) => {
+export const AddList = ({ items, onRemoveItem, onAddItem, originalItems }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event: any) => {
@@ -61,32 +56,32 @@ export const AddList = ({
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center"
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center"
+          horizontal: "center",
         }}
       >
-          <FormControlWrapper>
-            <FormLabel component="legend">Select Widgets</FormLabel>
-            <FormGroup>
-              {originalItems.map((i) => (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={items.includes(i)}
-                      onChange={handleChange}
-                      name={i}
-                    />
-                  }
-                  label={WidgetNames[i]}
-                  key={i}
-                />
-              ))}
-            </FormGroup>
-          </FormControlWrapper>
+        <FormControlWrapper>
+          <FormLabel component="legend">Select Widgets</FormLabel>
+          <FormGroup>
+            {originalItems.map((i) => (
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={items.includes(i)}
+                    onChange={handleChange}
+                    name={i}
+                  />
+                }
+                label={WidgetNames[i]}
+                key={i}
+              />
+            ))}
+          </FormGroup>
+        </FormControlWrapper>
       </Popover>
     </>
   );
-}
+};
