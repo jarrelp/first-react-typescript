@@ -11,17 +11,25 @@ import {
   InitialLayouts,
 } from "./data/ComponentsListData";
 
+const columns = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
+
 function Content({ size: { width } }) {
   const [items, setItems] = useState(OriginalItems);
   const [toolBoxItems, setToolBoxItems] = useState([]);
   const [layouts, setLayouts] = useState(
     getFromLS("layouts") || InitialLayouts
   );
+  const [breakpoint, setBreakpoint] = useState(null);
+  const [cols, setCols] = useState(columns);
   const onLayoutChange = (
     _: ReactGridLayout.Layout[],
     allLayouts: ReactGridLayout.Layouts
   ) => {
     setLayouts(allLayouts);
+  };
+  const onBreakpointChange = (breakpoint, cols) => {
+    setBreakpoint(breakpoint);
+    setCols(cols);
   };
   const onLayoutSave = () => {
     saveToLS("layouts", layouts);
@@ -54,17 +62,17 @@ function Content({ size: { width } }) {
       <ToolBox
         items={toolBoxItems}
         width={width}
-        onLayoutChange={onLayoutChange}
         onRemoveItem={onRemoveItem}
+        onAddItem={onPutItem}
         componentListData={ComponentListData}
       />
-      <TopBar
+      {/* <TopBar
         onLayoutSave={onLayoutSave}
         items={items}
         onRemoveItem={onTakeItem}
         onAddItem={onPutItem}
         originalItems={OriginalItems}
-      />
+      /> */}
       <SpeedDialComponent
         onLayoutSave={onLayoutSave}
         items={items}
@@ -76,7 +84,7 @@ function Content({ size: { width } }) {
         className="layout"
         layouts={layouts}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        cols={cols}
         rowHeight={60}
         width={width}
         onLayoutChange={onLayoutChange}
@@ -85,11 +93,17 @@ function Content({ size: { width } }) {
           <div
             key={key}
             className="widget"
-            data-grid={{ w: 3, h: 2, x: 0, y: Infinity }}
+            data-grid={{
+              w: 2,
+              h: 3,
+              x: (items.length * 2 - 2) % (cols.md || 12),
+              y: Infinity,
+            }}
           >
             <Widget
               id={key}
-              onRemoveItem={onRemoveItem}
+              onRemoveItem={onTakeItem}
+              onAddItem={onPutItem}
               component={ComponentListData[key]}
             />
           </div>

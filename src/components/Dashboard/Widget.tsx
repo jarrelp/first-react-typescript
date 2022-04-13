@@ -1,16 +1,55 @@
 import { styled } from "@mui/material";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
+import AddCircleOutlineTwoToneIcon from "@mui/icons-material/AddCircleOutlineTwoTone";
 import Typography from "@mui/material/Typography";
 import { WidgetNames } from "./data/ComponentsListData";
+import { keyframes } from "@emotion/react";
 import { IChartTypes } from "../../interfaces";
+import { useState } from "react";
 
 // interface WidgetProps {
 //   id: string
 //   onRemoveItem: (itemId: string) => void
 //   component: React.ReactNode
 // }
+
+const myKeyframe = keyframes`
+0%, 7% {
+  transform: rotateZ(0);
+}
+15% {
+  transform: rotateZ(-15deg);
+}
+20% {
+  transform: rotateZ(10deg);
+}
+25% {
+  transform: rotateZ(-10deg);
+}
+30% {
+  transform: rotateZ(6deg);
+}
+35% {
+  transform: rotateZ(-4deg);
+}
+40%, 100% {
+  transform: rotateZ(0);
+}
+`;
+
+const ShakedDeleteIcon = styled(DeleteOutlineTwoToneIcon)(({ theme }) => ({
+  ":hover": {
+    animation: `${myKeyframe} 2s linear infinite`,
+  },
+}));
+
+const ShakedAddIcon = styled(AddCircleOutlineTwoToneIcon)(({ theme }) => ({
+  ":hover": {
+    animation: `${myKeyframe} 2s linear infinite`,
+  },
+}));
 
 const RootWrapper = styled(Card)({
   width: "100%",
@@ -34,7 +73,46 @@ const BodyWrapper = styled("div")({
   flexGrow: 1,
 });
 
-export default function Widget({ id, onRemoveItem, component: Item }) {
+const IconSwitch = (onAddItem, onRemoveItem, id) => {
+  const [toggle, setToggle] = useState(false);
+
+  const toggler = () => {
+    toggle ? setToggle(false) : setToggle(true);
+  };
+
+  const toggleOnAddItem = (id) => {
+    onAddItem(id);
+    toggler();
+  };
+
+  const toggleOnRemoveItem = (id) => {
+    onRemoveItem(id);
+    toggler();
+  };
+
+  return (
+    <>
+      <IconButton
+        color={toggle ? "primary" : "danger"}
+        aria-label="add"
+        onClick={() => (toggle ? { toggleOnAddItem } : { toggleOnRemoveItem })}
+      >
+        {toggle ? (
+          <ShakedAddIcon fontSize="small" />
+        ) : (
+          <ShakedDeleteIcon fontSize="small" />
+        )}
+      </IconButton>
+    </>
+  );
+};
+
+export default function Widget({
+  id,
+  onAddItem,
+  onRemoveItem,
+  component: Item,
+}) {
   return (
     <RootWrapper>
       <HeaderWrapper>
@@ -42,9 +120,21 @@ export default function Widget({ id, onRemoveItem, component: Item }) {
           {WidgetNames[id]}
         </Typography>
         <SpacerWrapper />
-        <IconButton aria-label="delete" onClick={() => onRemoveItem(id)}>
-          <CloseIcon fontSize="small" />
+        {/* <IconButton
+          color="error"
+          aria-label="delete"
+          onClick={() => onRemoveItem(id)}
+        >
+          <ShakedDeleteIcon fontSize="small" />
         </IconButton>
+        <IconButton
+          color="primary"
+          aria-label="add"
+          onClick={() => onAddItem(id)}
+        >
+          <ShakedAddIcon fontSize="small" />
+        </IconButton> */}
+        <IconSwitch onAddItem={onAddItem} onRemoveItem={onRemoveItem} id={id} />
       </HeaderWrapper>
       <BodyWrapper>
         <Item />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { styled } from "@mui/material";
+import { Grid, styled } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
@@ -12,18 +12,14 @@ import { WidgetNames } from "./data/ComponentsListData";
 import Widget from "./Widget";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 
-const ToolBoxItem = ({ item, onTakeItem }) => {
-  return (
-    <div className="toolbox__items__item" onClick={onTakeItem}>
-      {item.i}
-    </div>
-  );
-};
+const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
+
+// const GetNewPlace = (length, x, y) => {};
 
 const ToolBox = ({
   items,
   width,
-  onLayoutChange,
+  onAddItem,
   onRemoveItem,
   componentListData,
 }) => {
@@ -34,28 +30,25 @@ const ToolBox = ({
           <ToolBoxItem key={item.i} item={item} onTakeItem={onTakeItem} />
         ))}
       </div> */}
-      <ResponsiveGridLayout
+      {/* <ResponsiveGridLayout
         className="layout"
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         rowHeight={60}
         width={width}
-        onLayoutChange={onLayoutChange}
-      >
-        {items.map((key) => (
-          <div
-            key={key}
-            className="widget"
-            data-grid={{ w: 3, h: 2, x: 0, y: Infinity }}
-          >
-            <Widget
-              id={key}
-              onRemoveItem={onRemoveItem}
-              component={componentListData[key]}
-            />
-          </div>
-        ))}
-      </ResponsiveGridLayout>
+        isDraggable={false}
+        isResizable={false}
+        cols={cols}
+      > */}
+      {items.map((key) => (
+        <div key={key} className="toolboxItem">
+          <Widget
+            id={key}
+            onRemoveItem={onRemoveItem}
+            onAddItem={onAddItem}
+            component={componentListData[key]}
+          />
+        </div>
+      ))}
+      {/* </ResponsiveGridLayout> */}
     </div>
   );
 };
