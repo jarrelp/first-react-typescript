@@ -44,18 +44,13 @@ const StyledBox = styled(Box)(({ theme }) => ({
   zIndex: 1,
 }));
 
-export default function SpeedDialComponent({
-  onLayoutSave,
-  items,
-  onRemoveItem,
-  onAddItem,
-  originalItems,
-}) {
+export default function SpeedDialComponent({ onLayoutSave, onToggleToolBox }) {
   const actions = [
     { icon: <SaveIcon />, name: "Save", onClick: () => onLayoutSave() },
     {
       icon: <AddCircleOutlineIcon />,
       name: "Add",
+      onClick: () => onToggleToolBox,
     },
   ];
 

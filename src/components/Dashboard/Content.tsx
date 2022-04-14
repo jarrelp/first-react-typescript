@@ -11,7 +11,7 @@ import {
   InitialLayouts,
 } from "./data/ComponentsListData";
 
-const columns = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
+const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
 
 function Content({ size: { width } }) {
   const [items, setItems] = useState(OriginalItems);
@@ -19,17 +19,12 @@ function Content({ size: { width } }) {
   const [layouts, setLayouts] = useState(
     getFromLS("layouts") || InitialLayouts
   );
-  const [breakpoint, setBreakpoint] = useState(null);
-  const [cols, setCols] = useState(columns);
+  const [showToolbox, setShowToolbox] = useState(true);
   const onLayoutChange = (
     _: ReactGridLayout.Layout[],
     allLayouts: ReactGridLayout.Layouts
   ) => {
     setLayouts(allLayouts);
-  };
-  const onBreakpointChange = (breakpoint, cols) => {
-    setBreakpoint(breakpoint);
-    setCols(cols);
   };
   const onLayoutSave = () => {
     saveToLS("layouts", layouts);
@@ -57,15 +52,21 @@ function Content({ size: { width } }) {
     onAddItem(itemId);
   };
 
+  const toggleToolBox = () => {
+    // setShowToolbox(!showToolbox);
+    showToolbox ? setShowToolbox(false) : setShowToolbox(true);
+  };
+
   return (
     <div>
-      <ToolBox
-        items={toolBoxItems}
-        width={width}
-        onRemoveItem={onRemoveItem}
-        onAddItem={onPutItem}
-        componentListData={ComponentListData}
-      />
+      {showToolbox ? (
+        <ToolBox
+          items={toolBoxItems}
+          onRemoveItem={onRemoveItem}
+          onAddItem={onPutItem}
+          componentListData={ComponentListData}
+        />
+      ) : null}
       {/* <TopBar
         onLayoutSave={onLayoutSave}
         items={items}
@@ -75,10 +76,7 @@ function Content({ size: { width } }) {
       /> */}
       <SpeedDialComponent
         onLayoutSave={onLayoutSave}
-        items={items}
-        onRemoveItem={onRemoveItem}
-        onAddItem={onAddItem}
-        originalItems={OriginalItems}
+        onToggleToolBox={toggleToolBox}
       />
       <ResponsiveGridLayout
         className="layout"

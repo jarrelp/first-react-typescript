@@ -16,40 +16,22 @@ const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
 
 // const GetNewPlace = (length, x, y) => {};
 
-const ToolBox = ({
-  items,
-  width,
-  onAddItem,
-  onRemoveItem,
-  componentListData,
-}) => {
+const ToolBox = ({ items, onAddItem, onRemoveItem, componentListData }) => {
   return (
     <div className="toolbox">
-      {/* <div className="toolbox__items">
-        {items.map((item) => (
-          <ToolBoxItem key={item.i} item={item} onTakeItem={onTakeItem} />
+      <div className="toolboxItemBox">
+        {items.map((key) => (
+          <div key={key} className="toolboxItem">
+            <Widget
+              id={key}
+              onRemoveItem={onRemoveItem}
+              onAddItem={onAddItem}
+              component={componentListData[key]}
+              isInToolbox={true}
+            />
+          </div>
         ))}
-      </div> */}
-      {/* <ResponsiveGridLayout
-        className="layout"
-        rowHeight={60}
-        width={width}
-        isDraggable={false}
-        isResizable={false}
-        cols={cols}
-      > */}
-      {items.map((key) => (
-        <div key={key} className="toolboxItem">
-          <Widget
-            id={key}
-            onRemoveItem={onRemoveItem}
-            onAddItem={onAddItem}
-            component={componentListData[key]}
-            isInToolbox={true}
-          />
-        </div>
-      ))}
-      {/* </ResponsiveGridLayout> */}
+      </div>
     </div>
   );
 };
