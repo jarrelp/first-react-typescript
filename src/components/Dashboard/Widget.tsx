@@ -73,45 +73,12 @@ const BodyWrapper = styled("div")({
   flexGrow: 1,
 });
 
-const IconSwitch = (onAddItem, onRemoveItem, id) => {
-  const [toggle, setToggle] = useState(false);
-
-  const toggler = () => {
-    toggle ? setToggle(false) : setToggle(true);
-  };
-
-  const toggleOnAddItem = (id) => {
-    onAddItem(id);
-    toggler();
-  };
-
-  const toggleOnRemoveItem = (id) => {
-    onRemoveItem(id);
-    toggler();
-  };
-
-  return (
-    <>
-      <IconButton
-        color={toggle ? "primary" : "danger"}
-        aria-label="add"
-        onClick={() => (toggle ? { toggleOnAddItem } : { toggleOnRemoveItem })}
-      >
-        {toggle ? (
-          <ShakedAddIcon fontSize="small" />
-        ) : (
-          <ShakedDeleteIcon fontSize="small" />
-        )}
-      </IconButton>
-    </>
-  );
-};
-
 export default function Widget({
   id,
   onAddItem,
   onRemoveItem,
   component: Item,
+  isInToolbox,
 }) {
   return (
     <RootWrapper>
@@ -120,21 +87,23 @@ export default function Widget({
           {WidgetNames[id]}
         </Typography>
         <SpacerWrapper />
-        {/* <IconButton
-          color="error"
-          aria-label="delete"
-          onClick={() => onRemoveItem(id)}
-        >
-          <ShakedDeleteIcon fontSize="small" />
-        </IconButton>
-        <IconButton
-          color="primary"
-          aria-label="add"
-          onClick={() => onAddItem(id)}
-        >
-          <ShakedAddIcon fontSize="small" />
-        </IconButton> */}
-        <IconSwitch onAddItem={onAddItem} onRemoveItem={onRemoveItem} id={id} />
+        {isInToolbox ? (
+          <IconButton
+            color="primary"
+            aria-label="add"
+            onClick={() => onAddItem(id)}
+          >
+            <ShakedAddIcon fontSize="small" />
+          </IconButton>
+        ) : (
+          <IconButton
+            color="error"
+            aria-label="delete"
+            onClick={() => onRemoveItem(id)}
+          >
+            <ShakedDeleteIcon fontSize="small" />
+          </IconButton>
+        )}
       </HeaderWrapper>
       <BodyWrapper>
         <Item />

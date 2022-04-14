@@ -45,6 +45,7 @@ const ToolBox = ({
             onRemoveItem={onRemoveItem}
             onAddItem={onAddItem}
             component={componentListData[key]}
+            isInToolbox={true}
           />
         </div>
       ))}

@@ -105,6 +105,7 @@ function Content({ size: { width } }) {
               onRemoveItem={onTakeItem}
               onAddItem={onPutItem}
               component={ComponentListData[key]}
+              isInToolbox={false}
             />
           </div>
         ))}
