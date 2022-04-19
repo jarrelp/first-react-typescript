@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import { styled } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -11,7 +11,8 @@ import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import EditIcon from "@mui/icons-material/Edit";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
+import EditOffTwoToneIcon from "@mui/icons-material/EditOffTwoTone";
 
 // interface TopBarProps {
 //   onLayoutSave: (event: React.MouseEvent<HTMLElement>) => void
@@ -20,13 +21,6 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 //   onAddItem: (itemId: string) => void
 //   originalItems?: () => string[]
 // };
-
-const CardWrapper = styled("div")(({ theme }) => ({
-  // padding: theme.spacing(1),
-  // width: "100%",
-  // display: "flex",
-  // justifyContent: "flex-end"
-}));
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   // position: "absolute",
@@ -45,38 +39,24 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 export default function SpeedDialComponent({ onLayoutSave, onToggleToolBox }) {
+  const [show, setShow] = useState(false);
+
+  const editOnClick = () => {
+    onToggleToolBox();
+    setShow(!show);
+  };
+
   const actions = [
     { icon: <SaveIcon />, name: "Save", onClick: () => onLayoutSave() },
     {
-      icon: <AddCircleOutlineIcon />,
+      icon: show ? <EditOffTwoToneIcon /> : <EditTwoToneIcon />,
       name: "Add",
-      onClick: () => onToggleToolBox,
+      onClick: editOnClick,
     },
   ];
 
   return (
-    // <div>
-
-    //   <AddList
-    //     items={items}
-    //     onRemoveItem={onRemoveItem}
-    //     onAddItem={onAddItem}
-    //     originalItems={originalItems}
-    //   />
-    //   <IconButton aria-label="save" onClick={onLayoutSave}>
-    //     <SaveIcon />
-    //   </IconButton>
-    // </div>
-    <StyledBox
-    // sx={{
-    //   height: 320,
-    //   transform: "translateZ(0px)",
-    //   flexGrow: 1,
-    //   position: "fixed",
-    //   bottom: "0",
-    //   right: "15",
-    // }}
-    >
+    <StyledBox>
       <StyledSpeedDial
         ariaLabel="SpeedDial openIcon example"
         sx={{ position: "absolute", bottom: 0, right: 0 }}

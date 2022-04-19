@@ -201,7 +201,8 @@
   display: flex;
   flex-direction: row;
   border-radius: 12px;
-  max-width: calc(100vw - 130px);
+  /* (if colapse out => 300 | if colapse in => 130) */
+  width: calc(100vw - 300px);
   padding: 10px;
 }
 

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import { withSize } from "react-sizeme";
-import TopBar from "./TopBar";
 import ToolBox from "./ToolBox";
 import Widget from "./Widget";
 import SpeedDialComponent from "./SpeedDialComponent";
@@ -19,7 +18,7 @@ function Content({ size: { width } }) {
   const [layouts, setLayouts] = useState(
     getFromLS("layouts") || InitialLayouts
   );
-  const [showToolbox, setShowToolbox] = useState(true);
+  const [showToolBox, setShowToolBox] = useState(false);
   const onLayoutChange = (
     _: ReactGridLayout.Layout[],
     allLayouts: ReactGridLayout.Layouts
@@ -52,14 +51,9 @@ function Content({ size: { width } }) {
     onAddItem(itemId);
   };
 
-  const toggleToolBox = () => {
-    // setShowToolbox(!showToolbox);
-    showToolbox ? setShowToolbox(false) : setShowToolbox(true);
-  };
-
   return (
     <div>
-      {showToolbox ? (
+      {showToolBox ? (
         <ToolBox
           items={toolBoxItems}
           onRemoveItem={onRemoveItem}
@@ -67,16 +61,9 @@ function Content({ size: { width } }) {
           componentListData={ComponentListData}
         />
       ) : null}
-      {/* <TopBar
-        onLayoutSave={onLayoutSave}
-        items={items}
-        onRemoveItem={onTakeItem}
-        onAddItem={onPutItem}
-        originalItems={OriginalItems}
-      /> */}
       <SpeedDialComponent
         onLayoutSave={onLayoutSave}
-        onToggleToolBox={toggleToolBox}
+        onToggleToolBox={() => setShowToolBox(!showToolBox)}
       />
       <ResponsiveGridLayout
         className="layout"
