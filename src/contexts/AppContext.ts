@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { User } from '../types/User';
+import { User } from '../interfaces';
 
 export interface IAppContext {
   user: User;

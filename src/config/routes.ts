@@ -12,8 +12,9 @@ import {
 } from '@mui/icons-material';
 
 import { Home } from '../pages/Home';
+import { Dashboard } from '../pages/Dashboard';
 
-import { Route } from '../types/Route';
+import { Route } from '../interfaces';
 
 const routes: Array<Route> = [
   {
@@ -30,6 +31,7 @@ const routes: Array<Route> = [
     key: 'router-dashboard',
     title: 'Dashboard',
     description: 'Dashboard',
+    component: Dashboard,
     path: '/dashboard',
     isEnabled: true,
     icon: DashboardIcon,

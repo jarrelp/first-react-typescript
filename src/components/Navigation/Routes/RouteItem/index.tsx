@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Icon, IconButton, lighten, ListItemButton, ListItemIcon, ListItemText, styled, Tooltip } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-import { Route } from '../../../../types';
+import { Route } from '../../../../interfaces';
 
 interface RouteItemProps {
   route: Route;

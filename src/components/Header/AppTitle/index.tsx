@@ -2,12 +2,6 @@ import { styled, Typography } from '@mui/material';
 
 import { APP_TITLE } from '../../../utils/constants';
 
-export const AppTitle = () => (
-  <StyledAppTitle variant="h6" noWrap>
-    {APP_TITLE}
-  </StyledAppTitle>
-);
-
 const StyledAppTitle = styled(Typography)`
   display: {
     xs: none;
@@ -15,3 +9,9 @@ const StyledAppTitle = styled(Typography)`
   }
   cursor: default;
 `;
+
+export const AppTitle = () => (
+  <StyledAppTitle variant="h6" noWrap>
+    {APP_TITLE}
+  </StyledAppTitle>
+);

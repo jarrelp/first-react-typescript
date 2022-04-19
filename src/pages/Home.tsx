@@ -10,7 +10,7 @@ export const Home = () => {
 
   return (
     <>
-      <Typography variant="h4">{`Hello, ${context.user.name} 🎃`}</Typography>
+      <Typography variant="h4">{`logged in as ${context.user.name}`}</Typography>
       <LogoWrapper>
         <StyledLogo src={logo} alt="logo" />
       </LogoWrapper>

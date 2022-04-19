@@ -3,7 +3,7 @@ import { ComponentType, FC } from 'react';
 /**
  * Represents the route of a page.
  */
-export type Route = {
+export interface Route {
   /**
    * The key of the route
    * @type {string}
