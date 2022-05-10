@@ -202,7 +202,7 @@
   flex-direction: row;
   border-radius: 12px;
   /* (if colapse out => 300 | if colapse in => 130) */
-  width: calc(100vw - 300px);
+  width: calc(100vw - 130px);
   padding: 10px;
 }
 
